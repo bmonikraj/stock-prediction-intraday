@@ -11,22 +11,27 @@ from matplotlib import pyplot as plt
 import statsmodels.api as sm
 from sklearn.metrics import mean_squared_error
 import math
-from sklearn.svm import LinearSVR
 from sklearn.linear_model import LinearRegression
 import numpy as np
+# Imported all the required modules
 
+# Read data from csv 
 data_train = pd.read_csv('Uniqlo(FastRetailing) 2012-2016 Training - stocks2012-2016.csv')
+
+# setting index to datetime
 data_train = data_train.reindex(index=data_train.index[::-1])
 data_train['Date'] = pd.to_datetime(data_train['Date'], format='%Y-%m-%d')
 data_train.index = data_train['Date']
 del data_train['Date']
 
+# setting index to datetime
 data_test = pd.read_csv('Uniqlo(FastRetailing) 2017 Test - stocks2017.csv')
 data_test = data_test.reindex(index=data_test.index[::-1])
 data_test['Date'] = pd.to_datetime(data_test['Date'], format='%Y-%m-%d')
 data_test.index = data_test['Date']
 del data_test['Date']
 
+# plotting dickey-fuller analysis 
 decomposition = sm.tsa.seasonal_decompose(data_train['Stock Trading'],freq=1)
 fig1 = decomposition.plot()
 plt.show(fig1)
