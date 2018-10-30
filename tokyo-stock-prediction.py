@@ -13,6 +13,7 @@ from sklearn.metrics import mean_squared_error
 import math
 from sklearn.linear_model import LinearRegression
 import numpy as np
+import seaborn as sns
 # Imported all the required modules
 
 # Read data from csv 
@@ -23,6 +24,8 @@ data_train = data_train.reindex(index=data_train.index[::-1])
 data_train['Date'] = pd.to_datetime(data_train['Date'], format='%Y-%m-%d')
 data_train.index = data_train['Date']
 del data_train['Date']
+
+sns.pairplot(data_train)
 
 # setting index to datetime
 data_test = pd.read_csv('Uniqlo(FastRetailing) 2017 Test - stocks2017.csv')
